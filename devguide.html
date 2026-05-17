@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FsMaster.in - Hostinger Deployment Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        main {
+            padding: 30px;
+        }
+        
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .info-box strong {
+            color: #667eea;
+        }
+        
+        section {
+            margin-bottom: 40px;
+        }
+        
+        section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        section h4 {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+        
+        p {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        pre {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 4px solid #667eea;
+            line-height: 1.5;
+        }
+        
+        pre code {
+            background: none;
+            color: #00ff00;
+            padding: 0;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        tr:hover {
+            background: #f0f4ff;
+        }
+        
+        .checklist {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .checklist ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: #155724;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        footer {
+            background: #f5f5f5;
+            padding: 20px 30px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .toc {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .toc h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            margin-left: 20px;
+        }
+        
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 FsMaster.in Deployment Guide</h1>
+            <p>Complete step-by-step guide to deploy on Hostinger</p>
+        </header>
+        
+        <main>
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3>📋 Table of Contents</h3>
+                <ul>
+                    <li><a href="#step1">Step 1: Choose Hostinger Plan</a></li>
+                    <li><a href="#step2">Step 2: Prepare Your Project</a></li>
+                    <li><a href="#step3">Step 3: Access Hostinger Control Panel</a></li>
+                    <li><a href="#step4">Step 4: Deploy Backend</a></li>
+                    <li><a href="#step5">Step 5: Deploy Frontend</a></li>
+                    <li><a href="#step6">Step 6: Configure Domain</a></li>
+                    <li><a href="#step7">Step 7: Set Up SSL Certificate</a></li>
+                    <li><a href="#step8">Step 8: Configure Reverse Proxy</a></li>
+                    <li><a href="#step9">Step 9: Update Frontend API URL</a></li>
+                    <li><a href="#step10">Step 10: Test Deployment</a></li>
+                    <li><a href="#step11">Step 11: Monitoring & Maintenance</a></li>
+                </ul>
+            </div>
+            
+            <!-- Project Overview -->
+            <section>
+                <h2>📌 Project Overview</h2>
+                <div class="info-box">
+                    <p><strong>Frontend:</strong> React + Vite (SPA)</p>
+                    <p><strong>Backend:</strong> Node.js/Express + Nodemailer</p>
+                    <p><strong>Database:</strong> None (email-only)</p>
+                    <p><strong>Target:</strong> Hostinger hosting</p>
+                </div>
+            </section>
+            
+            <!-- Step 1 -->
+            <section id="step1">
+                <h2><span class="step-number">1</span>Choose Hostinger Plan</h2>
+                <p>For your Node.js backend, you need a plan that supports Node.js applications.</p>
+                
+                <h3>Recommended Plans:</h3>
+                <ul>
+                    <li><strong>Cloud Hosting</strong> - Recommended for flexibility and performance</li>
+                    <li><strong>VPS</strong> - Full control, more expensive</li>
+                    <li><strong>NOT Shared Hosting</strong> - Limited Node.js support</li>
+                </ul>
+                
+                <h3>What to do:</h3>
+                <ol>
+                    <li>Go to <a href="https://hostinger.com" target="_blank">hostinger.com</a></li>
+                    <li>Choose: <strong>Cloud Hosting</strong> or <strong>VPS</strong></li>
+                    <li>Select a plan and complete purchase</li>
+                </ol>
+                
+                <div class="success">
+                    ✅ You should receive hosting credentials via email
+                </div>
+            </section>
+            
+            <!-- Step 2 -->
+            <section id="step2">
+                <h2><span class="step-number">2</span>Prepare Your Project</h2>
+                
+                <h3>2.1 Build Frontend for Production</h3>
+                <p>Navigate to your project root directory and run:</p>
+                <pre><code>cd e:\dev\AI\React\fsmaster.in
+npm run build</code></pre>
+                <p>This creates a <code>dist/</code> folder with optimized static files.</p>
+                
+                <h3>2.2 Verify Backend Requirements</h3>
+                <p>Check that all backend dependencies are installed:</p>
+                <pre><code>cd backend
+npm list</code></pre>
+                
+                <p>You should see:</p>
+                <ul>
+                    <li>express</li>
+                    <li>cors</li>
+                    <li>body-parser</li>
+                    <li>nodemailer</li>
+                    <li>dotenv</li>
+                </ul>
+            </section>
+            
+            <!-- Step 3 -->
+            <section id="step3">
+                <h2><span class="step-number">3</span>Access Hostinger Control Panel</h2>
+                <ol>
+                    <li>Login to Hostinger Dashboard: <a href="https://hpanel.hostinger.com" target="_blank">https://hpanel.hostinger.com</a></li>
+                    <li>Select your hosting account</li>
+                    <li>Go to: <strong>File Manager</strong> or <strong>Terminal</strong> (depending on your plan)</li>
+                </ol>
+            </section>
+            
+            <!-- Step 4 -->
+            <section id="step4">
+                <h2><span class="step-number">4</span>Deploy Backend (Node.js)</h2>
+                <p>These steps apply if you're using Cloud Hosting or VPS.</p>
+                
+                <h3>4.1 Connect via SSH</h3>
+                <pre><code>ssh root@your_server_ip
+# Enter your password when prompted</code></pre>
+                
+                <h3>4.2 Install Node.js</h3>
+                <pre><code>curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version
+npm --version</code></pre>
+                
+                <h3>4.3 Create Project Directory</h3>
+                <pre><code>mkdir -p /var/www/fsmaster.in
+cd /var/www/fsmaster.in</code></pre>
+                
+                <h3>4.4 Upload Backend Files</h3>
+                <p>Choose one method:</p>
+                
+                <h4>Option A - Using Git (Recommended):</h4>
+                <pre><code>git clone &lt;your-repo-url&gt; .
+cd backend
+npm install</code></pre>
+                
+                <h4>Option B - Using SFTP:</h4>
+                <ul>
+                    <li>Use FileZilla or WinSCP</li>
+                    <li>Upload <code>backend/</code> folder to <code>/var/www/fsmaster.in/</code></li>
+                    <li>Run: <code>npm install</code></li>
+                </ul>
+                
+                <h3>4.5 Set Up Environment Variables</h3>
+                <pre><code>nano /var/www/fsmaster.in/backend/.env</code></pre>
+                
+                <p>Add the following content:</p>
+                <pre><code>EMAIL_USER=bcsopc@gmail.com
+EMAIL_PASSWORD=your_app_password_here
+RECIPIENT_EMAIL=bcsopc@gmail.com
+FRONTEND_URL=https://yourdomain.com
+NODE_ENV=production
+PORT=5000</code></pre>
+                
+                <div class="warning">
+                    <strong>⚠️ Important:</strong> Use Gmail App Password, not your regular password. Generate one at <a href="https://myaccount.google.com/apppasswords" target="_blank">https://myaccount.google.com/apppasswords</a>
+                </div>
+                
+                <h3>4.6 Install PM2 (Process Manager)</h3>
+                <p>PM2 keeps your backend running 24/7:</p>
+                <pre><code>sudo npm install -g pm2
+cd /var/www/fsmaster.in/backend
+pm2 start server.js --name "fsmaster-backend"
+pm2 startup
+pm2 save</code></pre>
+            </section>
+            
+            <!-- Step 5 -->
+            <section id="step5">
+                <h2><span class="step-number">5</span>Deploy Frontend (React)</h2>
+                
+                <h3>5.1 Upload Built Files</h3>
+                <p>In your SSH terminal on Hostinger:</p>
+                <pre><code>mkdir -p /var/www/fsmaster.in/public_html
+
+# Copy built React files
+cp -r /var/www/fsmaster.in/dist/* /var/www/fsmaster.in/public_html/</code></pre>
+                
+                <h3>5.2 Configure for React Router</h3>
+                <p>Create a <code>.htaccess</code> file in <code>public_html/</code>:</p>
+                <pre><code>&lt;IfModule mod_rewrite.c&gt;
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+&lt;/IfModule&gt;</code></pre>
+            </section>
+            
+            <!-- Step 6 -->
+            <section id="step6">
+                <h2><span class="step-number">6</span>Configure Domain</h2>
+                
+                <h3>6.1 In Hostinger Dashboard:</h3>
+                <ol>
+                    <li>Go to <strong>Domains</strong></li>
+                    <li>Add your domain: <code>fsmaster.in</code></li>
+                    <li>Point DNS to Hostinger nameservers</li>
+                </ol>
+                
+                <h3>6.2 Update Domain Registrar</h3>
+                <p>If your domain is registered elsewhere, update the nameservers at your registrar to point to Hostinger.</p>
+                
+                <div class="warning">
+                    ⏱️ <strong>Wait 24-48 hours</strong> for DNS propagation
+                </div>
+            </section>
+            
+            <!-- Step 7 -->
+            <section id="step7">
+                <h2><span class="step-number">7</span>Set Up SSL Certificate</h2>
+                
+                <h3>Option A - Via Hostinger Dashboard:</h3>
+                <ol>
+                    <li>Go to <strong>SSL Certificate</strong></li>
+                    <li>Click <strong>Install SSL</strong> (usually free with Let's Encrypt)</li>
+                    <li>Wait for installation (5-10 minutes)</li>
+                </ol>
+                
+                <h3>Option B - Via SSH:</h3>
+                <pre><code>sudo apt install certbot python3-certbot-nginx
+sudo certbot certonly --nginx -d fsmaster.in -d www.fsmaster.in</code></pre>
+            </section>
+            
+            <!-- Step 8 -->
+            <section id="step8">
+                <h2><span class="step-number">8</span>Configure Reverse Proxy (Nginx)</h2>
+                
+                <p>Create Nginx configuration for routing:</p>
+                <pre><code>sudo nano /etc/nginx/sites-available/fsmaster.in</code></pre>
+                
+                <p>Paste the following configuration:</p>
+                <pre><code>server {
+    listen 80;
+    server_name fsmaster.in www.fsmaster.in;
+    
+    # Redirect HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name fsmaster.in www.fsmaster.in;
+    
+    # SSL certificates
+    ssl_certificate /etc/letsencrypt/live/fsmaster.in/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/fsmaster.in/privkey.pem;
+    
+    # Frontend
+    location / {
+        root /var/www/fsmaster.in/public_html;
+        try_files $uri $uri/ /index.html;
+        index index.html;
+    }
+    
+    # Backend API
+    location /api/ {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}</code></pre>
+                
+                <p>Enable the configuration:</p>
+                <pre><code>sudo ln -s /etc/nginx/sites-available/fsmaster.in /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx</code></pre>
+            </section>
+            
+            <!-- Step 9 -->
+            <section id="step9">
+                <h2><span class="step-number">9</span>Update Frontend API URL</h2>
+                
+                <p>Update your <code>Contact.jsx</code> to use your production domain:</p>
+                <pre><code>const response = await fetch('https://fsmaster.in/api/send-email', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    name: formData.name,
+    email: formData.email,
+    subject: formData.subject,
+    message: formData.message,
+  }),
+});</code></pre>
+                
+                <h3>Or use Environment Variables:</h3>
+                <p>Create <code>.env.production</code>:</p>
+                <pre><code>VITE_API_URL=https://fsmaster.in/api</code></pre>
+                
+                <p>Then in your component:</p>
+                <pre><code>const apiUrl = import.meta.env.VITE_API_URL || '/api';
+const response = await fetch(`${apiUrl}/send-email`, { ... });</code></pre>
+            </section>
+            
+            <!-- Step 10 -->
+            <section id="step10">
+                <h2><span class="step-number">10</span>Test Your Deployment</h2>
+                
+                <h3>10.1 Visit Your Website</h3>
+                <p>Open your browser and go to: <code>https://fsmaster.in</code></p>
+                
+                <h3>10.2 Test Contact Form</h3>
+                <ol>
+                    <li>Fill in the contact form</li>
+                    <li>Submit the form</li>
+                    <li>Verify that email is sent to your inbox</li>
+                </ol>
+                
+                <h3>10.3 Check Backend Logs</h3>
+                <pre><code>pm2 logs fsmaster-backend</code></pre>
+            </section>
+            
+            <!-- Step 11 -->
+            <section id="step11">
+                <h2><span class="step-number">11</span>Monitoring & Maintenance</h2>
+                
+                <h3>Check Backend Status:</h3>
+                <pre><code>pm2 status
+pm2 logs fsmaster-backend</code></pre>
+                
+                <h3>Update Backend Code:</h3>
+                <pre><code>cd /var/www/fsmaster.in/backend
+git pull
+npm install
+pm2 restart fsmaster-backend</code></pre>
+                
+                <h3>Renew SSL Certificate:</h3>
+                <pre><code>sudo certbot renew --dry-run</code></pre>
+                
+                <p>Let's Encrypt certificates auto-renew, but you can manually check with the command above.</p>
+            </section>
+            
+            <!-- Troubleshooting -->
+            <section>
+                <h2>🔧 Common Issues & Solutions</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Issue</th>
+                            <th>Solution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>API not reachable (CORS error)</td>
+                            <td>Check <code>/api/</code> proxy config in Nginx configuration</td>
+                        </tr>
+                        <tr>
+                            <td>Backend not starting</td>
+                            <td>Check logs: <code>pm2 logs</code></td>
+                        </tr>
+                        <tr>
+                            <td>Emails not sending</td>
+                            <td>Verify Gmail App Password in <code>.env</code> file</td>
+                        </tr>
+                        <tr>
+                            <td>Domain not working</td>
+                            <td>Wait for DNS propagation (24-48 hours)</td>
+                        </tr>
+                        <tr>
+                            <td>SSL certificate error</td>
+                            <td>Reinstall SSL from Hostinger dashboard</td>
+                        </tr>
+                        <tr>
+                            <td>404 errors on page refresh</td>
+                            <td>Ensure <code>.htaccess</code> is in <code>public_html/</code> folder</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Checklist -->
+            <section>
+                <h2>✅ Deployment Checklist</h2>
+                <div class="checklist">
+                    <ul>
+                        <li>Choose Cloud Hosting/VPS plan</li>
+                        <li>Build frontend: <code>npm run build</code></li>
+                        <li>Deploy backend via Git or SFTP</li>
+                        <li>Install Node.js on server</li>
+                        <li>Set <code>.env</code> variables on server</li>
+                        <li>Start backend with PM2</li>
+                        <li>Upload React <code>dist/</code> to <code>public_html/</code></li>
+                        <li>Create <code>.htaccess</code> for routing</li>
+                        <li>Point domain to Hostinger nameservers</li>
+                        <li>Install SSL certificate</li>
+                        <li>Configure Nginx reverse proxy</li>
+                        <li>Update frontend API URL</li>
+                        <li>Test contact form on production</li>
+                        <li>Verify emails are being sent</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>FsMaster.in Deployment Guide | Last Updated: May 16, 2026</p>
+            <p>For questions or issues, contact support or check Hostinger documentation</p>
+        </footer>
+    </div>
+</body>
+</html>
