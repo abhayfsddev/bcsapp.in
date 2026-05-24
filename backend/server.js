@@ -14,17 +14,27 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://fsmaster.in',
+    'https://www.fsmaster.in'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Import routes
 const emailRouter = require('./emailRouter'); // or your email route path
+const analyticsRouter = require('./analyticsRouter'); // Analytics routes
 
 // Routes
 app.use('/api', emailRouter);
+app.use('/api', analyticsRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -893,6 +893,7 @@ textarea.form-input {
   .sidebar {
     width: 140px;
     padding: 8px 4px;
+    display: none;
   }
   .sidebar-item {
     font-size: 11px;

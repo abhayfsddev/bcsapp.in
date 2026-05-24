@@ -1,0 +1,34 @@
+{
+  "visits": {
+    "total": 6,
+    "weekly": [
+      {
+        "week": "2026-05-17",
+        "count": 6
+      }
+    ],
+    "monthly": [
+      {
+        "month": "2026-05",
+        "count": 6
+      }
+    ],
+    "lastReset": "2024-01-01T00:00:00.000Z"
+  },
+  "cvDownloads": {
+    "total": 1,
+    "weekly": [
+      {
+        "week": "2026-05-17",
+        "count": 1
+      }
+    ],
+    "monthly": [
+      {
+        "month": "2026-05",
+        "count": 1
+      }
+    ],
+    "lastReset": "2024-01-01T00:00:00.000Z"
+  }
+}

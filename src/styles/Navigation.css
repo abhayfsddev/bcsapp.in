@@ -1,5 +1,7 @@
 /* Navigation Component */
 .nav {
+  position: relative;
+  z-index: 9999;
   height: 52px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--border);
@@ -100,4 +102,79 @@
 .icon-btn:hover {
   color: var(--brand);
   border-color: var(--brand);
+}
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.hamburger-box {
+  display: inline-block;
+  width: 22px;
+  height: 16px;
+  position: relative;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text2);
+  display: block;
+  position: absolute;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburger-inner { top: 50%; transform: translateY(-50%); }
+.hamburger-inner::before { content: ''; top: -7px; }
+.hamburger-inner::after { content: ''; top: 7px; }
+
+.nav.mobile-open .hamburger-inner { background: transparent; }
+.nav.mobile-open .hamburger-inner::before { transform: translateY(7px) rotate(45deg); }
+.nav.mobile-open .hamburger-inner::after { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav {
+    height: 52px;
+    padding: 0 12px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 0;
+    padding: 8px;
+    z-index: 99999;
+    max-height: calc(100vh - 56px);
+    overflow: auto;
+  }
+
+  /* stronger rule so JS toggle reliably shows the menu */
+  .nav-links.open,
+  .nav.mobile-open .nav-links {
+    display: flex !important;
+  }
+
+  .nav-link {
+    padding: 12px 16px;
+    border-radius: 6px;
+    width: 100%;
+  }
+
+  .hamburger { display: inline-flex; align-items: center; }
+
+  .nav-right { display: flex; gap: 6px; }
 }

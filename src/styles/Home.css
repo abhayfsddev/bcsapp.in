@@ -193,6 +193,20 @@
   max-width: 100%;
 }
 
+@media (max-width: 768px) {
+  .home-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .home-hero-code .home-code-panel {
+    max-width: 100%;
+  }
+
+  .home-hero { border-radius: 12px; }
+}
+
 .home-hero-copy .hero-desc {
   max-width: none;
 }
